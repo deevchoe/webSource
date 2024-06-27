@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- 코드가 반복될 때는 반복문 처리해주는게 좋다. -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구구단 출력</title>
+<script type="text/javascript">
+function execution(){
+	let arr = document.getElementById("sel");	// sel 값을 받아두고
+	// 'sel'이라는 ID를 가진 HTML 요소를 찾고 변수 sel에 저장한다.
+	let su = arr.options[arr.selectedIndex].value;
+	// arr : 위에 있는 arr 변수에서 ID가 sel인 <select> 요소를 가리킨다.
+	// sel이라는 ID를 가진 <select> 요소에서 현재 선택된 옵션의 값을 변수 'su'에 저장한다.
+	
+	let tr = document.createElement("tr");
+	let headerRow = document.createElement('tr');
+	table.appendChild(headerRow);
+	headerRow.textContent = `${su}단 ===`;
+	for (let n = 1; n <= 9; n++) {
+		tr = row = document.createElement('tr');
+		let td = document.createElement("td");
+		let calc = document.createTextNode(su + "*" + n + "=" + su * n);
+		td.appendChild(calc);
+		tr.appendChild(td);
+		table.appendChild(tr);
+	}
+	document.getElementById("table").appendChild(tr);
+	
+}
+
+function cleanFunc(){
+	document.getElementById("table").innerHTML = "";
+    document.getElementById("sel").selectedIndex = 0;	// select 요소를 기본값으로 변경
+}
+
+</script>
+</head>
+<body>
+<h3>** 구구단 출력 **</h3>
+<form action="#" name="frm">
+	단 : <select name="sel" id="sel" onchange="execution()">
+		<option value="">선택</option>
+		<option value="2">2단</option>
+		<option value="3">3단</option>
+		<option value="4">4단</option>
+		<option value="5">5단</option>
+		<option value="6">6단</option>
+		<option value="7">7단</option>
+		<option value="8">8단</option>
+		<option value="9">9단</option>
+	</select>
+	<button id = "btnClean">삭제</button>
+</form>
+<br>
+<table id="table"></table>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnGet").onclick=getFunc;
+	document.querySelector("#btnPost").onclick=postFunc;
+}
+
+let xhr;
+
+function getFunc(){
+	//alert("a");
+	let irum = frm.name.value;
+	let nai = frm.age.value;
+	//alert(irum + " " + nai);
+	
+	fName = "getpost.jsp?name=" + irum + "&age=" + nai;
+	
+	xhr = new XMLHttpRequest();
+	xhr.open('get', fName, true);
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4){
+			if(xhr.status === 200){
+				getProcess();
+			}else{
+				alert("요청 실패 : " + xhr.status);
+			}
+		}
+	}
+	
+	xhr.send(null);
+}
+
+function getProcess(){
+	let data  = xhr.responseText;
+	let ss = "get 요청 결과 : " + data;
+	document.querySelector("#show").innerText = ss;
+}
+
+function postFunc(){
+	//alert("b");
+	let irum = frm.name.value;
+	let nai = frm.age.value;
+	//alert(irum + " " + nai);
+		
+	xhr = new XMLHttpRequest();
+	xhr.open('post', "getpost.jsp", true);	// post, 요청 파일명
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4){
+			if(xhr.status === 200){
+				postProcess();
+			}else{
+				alert("요청 실패 : " + xhr.status);
+			}
+		}
+	}
+	
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");	// 브라우저에게 알려주는거
+	xhr.send("name=" + irum + "&age=" + nai);
+}
+
+function postProcess(){
+	let data  = xhr.responseText;
+	let ss = "post 요청 결과 : " + data;
+	document.querySelector("#show").innerText = ss;
+}
+</script>
+</head>
+<body>
+<h2>Ajax GET, POST 요청</h2>
+<form name="frm">
+이름 : <input type="text" name="name" value="yeon"><br>
+나이 : <input type="text" name="age" value ="26"><br>
+<br>
+<input type="button" value = "GET" id = "btnGet">
+<input type="button" value = "POST" id = "btnPost">
+<hr>
+<div id="show"></div>
+</form>
+</body>
+</html>

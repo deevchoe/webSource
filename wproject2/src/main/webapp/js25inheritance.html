@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+class Animal{
+	move = '움직임';
+	
+	constructor(name){
+		document.write(`<br>Animal 생성자`);
+		this.name = name;
+		this.speed = 0;
+	}
+	
+	run(speed){
+		this.speed = speed;
+		document.write(`<br>${this.name} : ${this.speed}`);
+		document.write(`<br>${this.move}`);
+		
+	}
+	
+	stop(){
+		this.speed = 0;
+		document.write(`<br>${this.name} : stop`);
+	}
+	
+	disp(){
+		document.write(`<br>동물임을 선언함`);
+	}
+}
+
+class Rabbit extends Animal{
+	leg = 2;
+//	move = '움직임2';
+	
+	constructor(name, leg){
+		document.write(`<br>Rabbit 생성자`);
+		//super(); err
+		super(name); //부모 생성자 호출 
+		this.leg = leg; //this() : 구조적으로 있을 수 없다.
+		
+	}
+	
+	stop(){ // method overriding 
+		super.stop(); //메소드 내에서 super.메소드 o
+		document.write(`<br>Rabbit의 stop 메소드`);
+		this.disp();
+		this.hide();
+	}
+	
+	disp(){ // method overriding 
+		document.write(`<br>토끼 만세`);
+		document.write(`<br>this.move : ${this.move}`);//this.move : 움직임 // 현재 클래스에서 찾다가 없으면 부모클래스에서 찾음
+		document.write(`<br>super.move : ${super.move}`);//super.move : undefined 
+		// 메소드 내에서 super.멤버필드 는 안됨. this.맴버필드 o
+		
+	}
+	
+	hide(){// Rabbit의 고유 메소드
+		document.write(`<br>Rabbit의 고유 메소드 : ${this.name} 숨어버리다~`);
+	}
+}
+
+//class Dog extends Animal, Rabbit{ 	// Classes can only extend a single class.
+class Dog extends Animal{
+	constructor(name){
+		super(name);
+	}
+	
+	disp(){	// method overriding
+		document.write(`<br>댕댕이 화이팅 : 열심히 ${this.move}`);
+	}
+}
+
+function func(){
+	const ani = new Animal('동물 수퍼 클래스');
+	ani.disp();
+	ani.run(5);
+	ani.stop();
+	
+	document.write(`<hr>상속을 알아보자<br>`);
+	const rabbit = new Rabbit('토끼', 4);
+	rabbit.disp();
+	rabbit.run();
+	document.write(`<br>--------`);
+	rabbit.stop();
+	rabbit.hide();
+
+	document.write(`<br>^^^^^^^^^^^^^^^^^^^`);
+	const dog = new Dog('우리 댕댕이');
+	dog.disp();
+	dog.run(5);
+	dog.stop();
+
+	document.write(`<br>^^^다형성^^^^^^^^^^^^^^^^`);
+	let poly = rabbit;	// 자바와 다름. 자바스크립트는 일반 변수를 사용한다. 자바처럼 부모 객체 변수를 선언하고 자식의 객체를 주고 부모 객체를 부르고 그런거 없다.
+	poly.disp();
+	document.write(`<br>`);
+	poly = dog;
+	poly.disp();
+}
+
+</script>
+</head>
+<body onload="func()">
+<h1>클래스의 상속</h1>
+객체들 간의 관계를 구축하는 방법이다.
+부모(수퍼) 클래스 등의 기존 클래스로부터 속성과 동작을 상속을 통해 자식 클래스를 만들 수 있다.
+
+</body>
+</html>

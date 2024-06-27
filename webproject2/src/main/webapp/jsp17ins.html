@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script> <!-- jQuery 외부 라이브러리 -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//alert("a");
+	$("#btnIns").click(function(){
+		if($("#sang").val() === ""){
+			alert("상품명 입력!");
+			return;
+		}else if(isNaN($("#sang").val()) === false){
+			alert("상품명은 문자만 허용!!");
+			$("#sang").val("");
+			return;
+		}
+		// 수량, 단가는 생략
+		
+		$("#frm").submit();
+	});
+	$("#btnList").bind("click", listFunc);
+});
+
+function listFunc(){
+	location.href="jsp17dbcp.jsp";
+}
+</script>
+
+</head>
+<body>
+** 상품 추가 **<br>
+<form action="jsp17ins.jsp" method="post" id="frm">
+품명 : <input type="text" name="sang" id="sang"><br>
+수량 : <input type="text" name="su" id="su"><br>
+단가 : <input type="text" name="dan" id="dan"><br>
+<br>
+<input type="button" value="상품 추가" id="btnIns">
+<input type="reset" value="입력취소">
+<input type="button" value="상품보기" id="btnList">
+</form>
+</body>
+</html>

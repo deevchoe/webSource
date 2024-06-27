@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>* 은행 계좌 시스템 *</h2>
+클래스, 상속, 접근자 메소드, 정적 메소드 기능 연습
+<hr>
+<script type="text/javascript">
+class BankAccount{		// 기본 계좌 클래스
+	// 생성자는 계좌 소유자와 초기 잔액을 설정
+	constructor(owner, balance = 0){	// 초기치로 0을 주고 시작할게요
+		this.owner = owner;
+		this.balance = balance;
+	}
+	
+	deposit(amount){	// 입금
+		if(amount > 0){
+			this.balance += amount;
+			console.log(`${amount}이(가) 입금. 현재 잔액 : ${this.balance}`);
+		}else{
+			console.log(`입금액이 있어야 합니다.`);
+		}
+	}
+	
+	withdraw(amount){		// 출금
+		if(amount > 0 && amount <= this.balance){
+			this.balance -= amount;
+			console.log(`${amount}이(가) 출금. 현재 잔액 : ${this.balance} 남았습니다.`)
+		}else{
+			console.log(`출금액은 잔고액 이상이어야 합니다.`);
+		}
+	}
+	
+	getBalance(){		// 잔고 확인
+		return this.balance;
+	}
+	
+	toString(){	// 특정 고객의 계좌 정보를 문자열로 반환
+		return `${this.owner}님의 계좌 잔액 : ${this.balance}`;
+	}
+}
+
+
+class SavingsAccount extends BankAccount{
+	// 생성자에 이자율이 추가
+	constructor(owner, balance = 0, interestRate = 0.02){
+		super(owner, balance);
+		this.interestRate = interestRate;
+	}
+	
+	addInterest() {		// 이자 계산 후 잔액에 추가하기
+		const interest = this.balance * this.interestRate;
+		this.deposit(interest);		// 이자 입금
+		console.log(`이자액 ${interest}이 추가되어 현재 잔액은 ${this.balance}입니다.`);
+	}
+	
+	toString(){	// 특정 고객의 계좌 정보를 문자열로 반환 (오버라이딩)
+		return `${this.owner}님의 저축 계좌 잔액 : ${this.balance}, 이자율 : ${this.interestRate}`;
+	}
+}
+
+class WooriBank{	// 계좌가 있는 상태에서 입출금 처리 클래스
+	static createAccount(owner, type='checking', balance = 0){	// WooriBank.createaccount하면 된다. static을 써서 정적인 상태가 되었으니까 new 안해도 된다.
+		switch(type){
+		case 'savings':	// 이미 계좌가 있는 경우
+			return new SavingsAccount(owner, balance);
+		case 'checking':	// 신규
+		default:	
+			return new BankAccount(owner, balance);
+		}
+	}
+}
+
+// 고객이 은행에 방문해서 실행
+const cjy = WooriBank.createAccount('최지연','savings', 10000);
+console.log(cjy.toString());
+cjy.deposit(50000);
+cjy.withdraw(20000);
+console.log(cjy.toString());
+console.log(`--------------------------`);
+const ksi = WooriBank.createAccount('권상일','checking', 20000);
+ksi.deposit(50000);
+ksi.withdraw(20000);
+console.log(ksi.toString());
+</script>
+</body>
+</html>

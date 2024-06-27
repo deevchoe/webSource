@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/jq3.css" type="text/css"/>
+
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="js/jq3.js"></script>
+</head>
+<body>
+<h2>** 입력 자료 양식 **</h2>
+<form id="signfrm">
+	<label for="userid">아이디 입력 : </label>
+	<input type="text" name="userid" id="userid" placeholder="2글자 이상" value="ko12">
+	<span class = "msg" id="id_err">문자로 구성된 아이디를 채우시오</span>
+	<br>
+	<label for="age">나이 입력 : </label>
+	<!-- 
+	<input type="number" name="age" id="age" required="required">
+	 -->
+	<input type="text" name="age" id="age" required="required">	<!-- 나이값을 꼭 줘! 옵션 : required -->
+	<span class = "msg" id="age_err1">나이를 채우시오</span>
+	<span class = "msg" id="age_err2">나이는 양의 정수만 허용(15 ~ 100)</span>
+	<br>
+	<label for="pwd1">비밀번호 입력 : </label>
+	<input type="password" name="pwd1" id="pwd1">
+	<span class="msg" id="pwd_err1">비밀번호를 채우시오</span>
+	<br>
+	<label for="pwd2">비밀번호 재입력 : </label>
+	<input type="password" name="pwd2" id="pwd2">
+	<span class="msg" id="pwd_err2">비밀번호 불일치!</span>
+	<br>
+	<input type ="button" id="btnSend" value="전 송">
+</form>
+</body>
+</html>

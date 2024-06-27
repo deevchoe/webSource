@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+문1) 두 수를 함수로 입력하여 +, -, *, / 한 결과를 함수 내에서 각각 출력하세요.
+아래와 같이 호출하면 결과 출력
+document.write(showOper(8, 2));
+ */
+function showOper(para1, para2){
+	let calc = [
+		para1 + para2,
+		para1 - para2,
+		para1 * para2,
+		para1 / para2
+	]
+	return calc;
+}
+document.write(showOper(8, 2));
+
+document.write('<br>');
+function sumArray(arr){
+	let sum = 0;
+	for(let a = 0; a < arr.length; a++){
+		sum += a;
+	}
+	return sum;
+}
+
+document.write(sumArray([1, 2, 3, 4, 5]));
+document.write(sumArray([10, 20, 30]));
+ 
+</script>
+
+</body>
+</html>

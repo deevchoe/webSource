@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit();
+	}
+}
+</script>
+
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src="images/sangpum2.jpg" width="80%">
+		</td>
+		<td>
+<pre>
+파스텔펫 반려동물 시스루 자수 플라워 원피스
+
+17,800원
+
+무늬 유무: 무늬 있음
+애견용품 의류 형태: 원피스
+사이즈: 소(S)
+
+	
+</pre>
+	</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="Cart" name="frm" method="post">
+				<input type="hidden" name="name" value="파스텔펫 반려동물 시스루 자수 플라워 원피스">
+				<input type="hidden" name="price" value="17800">	<!-- 가격을 넘길때는 콤마 찍지 말고 넘기기~ -->
+				<input type="button" id="btnOk" value="장바구니에 상품 담기">
+				<input type="button" value="홈으로" onclick="history.back()"> <!-- 자바스크립트명령 이전 페이지로 이동하시오 => history.back() -->
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

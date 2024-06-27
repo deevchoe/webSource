@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src="images/sangpum1.png" width="80%">
+		</td>
+		<td>
+<pre>
+리치독스 강아지 물놀이 캐노피 무지개 튜브 M
+
+29,500원 쿠팡판매가	
+28,020원 와우할인가	
+
+사이즈 X 색상 X 수량 : M(외부 80cm) X 혼합색상 X 1개
+	
+</pre>
+	</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="Cart" name="frm" method="post">
+				<input type="hidden" name="name" value="리치독스 강아지 물놀이 캐노피 무지개 튜브 M">
+				<input type="hidden" name="price" value="29500">	<!-- 가격을 넘길때는 콤마 찍지 말고 넘기기~ -->
+				<input type="button" id="btnOk" value="장바구니에 상품 담기">
+				<input type="button" value="홈으로" onclick="history.back()"> <!-- 자바스크립트명령 이전 페이지로 이동하시오 => history.back() -->
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

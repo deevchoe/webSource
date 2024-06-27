@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function abc(){
+	let my = document.getElementById("my");
+	console.log(my.nodeName + " " + 
+			my.childNodes[0].nodeValue + " " +
+			my.firstChild.nodeValue);
+	console.log(my.getAttribute("id"));
+	console.log(my.getAttribute("comments"));
+}
+function def(){
+	let arr = document.getElementsByTagName("input");
+	console.log("arr의 크기 : " , arr.length);
+	console.log(arr[0].getAttribue("value"));
+	console.log(arr[1].getAttribue("value"));
+}
+
+function func(para){
+	let ele = document.createElement("i");	// <i>태그 생성</i>
+	let itext = document.createTextNode(para) // <i>안녕</i> <= 이거 만들려고해
+	ele.appendChild(itext);
+	
+	document.getElementById("show").appendChild(ele);
+}
+
+function cleFunc(){
+	let target = document.getElementById("show");
+	
+	//target.removeChild(target.lastChild);
+	//target.removeChild(target.firstChild);
+	while(target.hasChildNodes()){
+		target.removeChild(target.childNodes[0]);
+	}
+}
+
+</script>
+</head>
+<body>
+<h1>DOM Test</h1>
+<!-- 
+구조화된 문서(ML(MarkupLanguage), tree 구조)에 접근하여 요소 및 속성 또는 텍스트를
+참조, 수정, 삭제, 추가 할 수 있는 기술
+
+DOM에 대해 좀 더 정리하기
+ -->
+<h2 id="my" comments="이건 속성">DOM 객체 참조</h2>	<!-- childNodes[0]번째가 되기도 하고 firstChild가 되기도 함 -->
+<input type="button" value="id 검색" onclick="abc()"><br>
+<input type="button" value="element 검색" onclick="def()">
+<hr>
+<h1>요소 생성 및 삭제</h1>
+<button onclick="func('안녕')">요소 생성1</button>
+<button onclick="func('반가워')">요소 생성2</button>
+<button onclick="cleFunc('반가워')">요소 삭제</button>
+<br>
+<div id="show"></div>
+</body>
+</html>

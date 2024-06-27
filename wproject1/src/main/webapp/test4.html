@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="최지연">
+<meta name="subject/title" content="연습용 홈페이지">
+<meta name="date" content="2024-05-13">
+
+<!-- 검색 로봇에 의해 검색을 당할 자료를 적음 -->
+<!-- 검색 로봇은 keyword나 description을 참조해서 자료를 찾는다. -->
+<meta name="keyword" content="html 정보 설명">
+<meta name="description" content="홈페이지 작성 정보">
+<!-- 
+<meta http-equiv="refresh" content="3; url='test1.html'">
+ -->
+<title>Insert title here</title>
+</head>
+<body>
+form tag : 사용자와 정보를 소통할 수 있는 (상호작용이 가능) 태그
+<hr>
+<h2>개인 정보 입력</h2>
+<form action="#" name="frm" method="get">
+<!-- action=에는 자바 파일(.java)을 쓴다. -->
+1. 이름 : <input type="text" id="ir" name="irum" size="10" maxlength="10" value="홍길동"><br>
+<!-- id는 자바스크립트나 css에서 써먹는다. 
+	name은 자바에서 받음
+-->
+2. 아이디 : <input type="text" name="id"><br>
+3. 비밀번호 : <input type="password" name="pwd" value="1234"><br>
+4. 업로드 : <input type="file" name="fname"><br>
+5. 자기 소개 : <textarea rows="5" cols="60" name="my"></textarea><br>
+6. 성별 : 
+<input type="radio" name="gender" value="m">남자&nbsp;&nbsp;&nbsp;
+<!-- 라디오버튼은 반드시 하나는 선택하게 해야 한다. 
+하나의 그룹이어야 한다. name이 같아야 하나의 그룹이 된다. 
+체크는 checked="checked"를 사용한다.
+자바에는 value값이 넘어간다. 남자를 선택하면 m 여자를 선택하면 f가 넘어간다. -->
+<input type="radio" name="gender" value="f" checked="checked">여자<br>
+7. 스포츠
+<input type="checkbox" name="sports" values="축구">축구&nbsp;&nbsp;&nbsp;
+<!-- checkbox는 0개 이상 복수 선택 가능 -->
+<input type="checkbox" name="sports" values="야구">야구&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="sports" values="농구">농구<br/>
+8. 교통수단
+<!-- 정해져있는건 손으로 쓰게하는건 안좋은 방법이다. 고르기!! -->
+<select name="tr"> <!-- size="1" --> <!-- multiple="multiple" -->
+	<option value="도보">도보</option>
+	<option value="버스">버스</option>
+	<option value="전철">전철</option>
+</select><br>
+9. 숨김
+<input type="hidden" name="Hi" value="Hello">
+<br><br>
+<input type="submit" value="  전 송  ">
+</form>
+</body>
+</html>

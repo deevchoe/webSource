@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function(){
+	let btnOk = document.querySelector("#btnOk");
+	btnOk.addEventListener("click", func);
+}
+
+function func(){
+	if(frm.name.value === "" || frm.addr.value === "" || frm.age.value === "" ){
+		alert("자료 입력!");
+		return;
+	}
+	frm.submit();
+}
+</script>
+</head>
+<body>
+<h2>get 요청</h2>
+<a href="ServletEx4Get?name=james&addr=jeju&age=34">ServletEx4Get 요청(get)</a>
+<br>
+form tag로 get 요청
+<form action="ServletEx4Get" method="get" name="frm">
+이름 : <input type="text" name="name" size="10" value="tom"><br>
+주소 : <input type="text" name="addr" size="50" value="seoul"><br>
+나이 : <input type="text" name="age" size="10" value="26"><br>
+<input type="button" id="btnOk" value="자료 전송">
+<input type="reset" id="btnCancel" value="입력 취소"><!-- reset : 자바스크립트 기능이 들어가있어용 -->
+</form>
+</body>
+</html>

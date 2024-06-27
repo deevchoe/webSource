@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnA").onclick=startFunc;
+	document.querySelector("#btnM").onclick=startFunc;
+	document.querySelector("#btnF").onclick=startFunc;
+}
+
+function startFunc(){
+	let gender = frm.gender.value;
+
+    // get 방식
+	fName = "js37exam1.jsp?gender=" + gender;
+
+	// 객체 생성
+	xhr = new XMLHttpRequest();
+	xhr.open('get', fName, true);
+
+	// 통신상태 확인 - 문제가 없으면 process()
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState  === 4) {
+		    if (xhr.status === 200) {
+				getProcess();
+			} else {
+				alert("요청 실패 : " + xhr.status);
+			}
+		}
+	}
+	xhr.send(null);
+
+}
+
+function getProcess(){
+
+	let data = xhr.responseText;
+	//alert(data);
+	let parseData = JSON.parse(data);
+	//alert(parseData.sangpum.length);
+	let str = "<table border='1'>";
+	str += "<tr><th>사번</th><th>이름</th><th>직급</th><th>입사년</th></tr>";
+	
+	let count = 0;
+	for(let i = 0; i < parseData.jikwon.length; i++){
+		str += "<tr>";
+		str += "<td>" + parseData.jikwon[i].사번 + "</td>";
+		str += "<td>" + parseData.jikwon[i].이름 + "</td>";
+		str += "<td>" + parseData.jikwon[i].직급 + "</td>";
+		str += "<td>" + parseData.jikwon[i].입사년 + "</td>";
+		str += "</tr>";
+		
+		count++;
+	}
+	
+	str += "</table>";
+	document.getElementById("disp").innerHTML = str;
+	document.getElementById("disp2").innerHTML = `인원수는 ${count}명 입니다`;
+}
+</script>
+</head>
+<body>
+<h2>Ajax GET, POST 요청</h2>
+<form name="frm">
+직원 정보<br>
+<input type="radio" id="btnA" name="gender" value="all" checked="checked">전체&nbsp;&nbsp;&nbsp;
+<input type="radio" id="btnM" name="gender" value="남">남자&nbsp;&nbsp;&nbsp;		<!-- db에서 남, 여로 되어 있으니까 value는 남,여로 하자. -->
+<input type="radio" id="btnF" name="gender" value="여">여자<br>
+<hr>
+<div id="disp"></div>
+<br>
+<div id="disp2"></div>
+</form>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+table 태그 연습<br>
+<table border="1">
+ <thead>
+ 	<tr>
+ 		<th>제목1</th><th>제목2</th><th>제목3</th>	<!-- 종속태그 -->
+ 	</tr>
+ </thead>
+ <tbody>
+	<tr>
+ 		<td>내용1임을 알림</td><td>내용2</td><td>내용3</t3>
+ 	</tr>
+	<tr>
+ 		<td>내용4</td><td>내용5</td><td>&nbsp;</t3>	<!-- 가독성을 위해 그냥 공백으로 두기 보다는 &nbsp;를 추가해주기도 함 -->
+ 	</tr>
+ </tbody>
+</table>
+<br>
+<table border="2" bgcolor="pink"		
+		style="background-image:url('images/snow.png')">	<!-- 사진이 배경으로 깔린거 -->	
+	<caption>상품자료</caption>
+	<tr bgcolor="red">
+		<td bgcolor="silver"><b>상품명</b></td>	<!-- 우선순위는 자식 태그 지역이 우선 -->
+		<td>수량</td>
+		<td>단가</td>
+	</tr>
+	<tr>
+		<td>컴퓨터</td>
+		<td align="center">1</td>
+		<td>
+			<img src="images/pic2.png" width="100">
+		</td>
+	</tr>
+	<tr>
+		<td>a</td>
+		<td>
+			<table border="3">
+			 <tr>
+			 	<td>	<!-- 데이터는 td 안에만 준다. 그 데이터는 텍스트일수도 테이블일수도 사진일수도 flash 파일 등등이 있다. -->
+			 		<a href="https://www.naver.com">Naver</a>
+			 	</td>	
+			 	<td>네이버</td>
+			 </tr>
+			</table>
+		</td>
+		<td>c</td>
+	</tr>
+</table>
+<br>	<!-- 행 병합 row span, 열 병합 col span -->
+<table border="1" width="280">		<!-- 비율로 줬기 때문에 브라우저의 크기에 따라 같이 조정된다. -->
+ <tr>
+ 	<td colspan="2">a</td>	<!-- 열 병합 -->
+ 	<td>b</td>
+ 	<td rowspan="2">c</td>	<!-- 행 병합 -->
+ </tr>
+ <tr>
+ 	<td>d</td>
+ 	<td>e</td>
+ 	<td>f</td>
+ </tr>
+</table>
+<br>
+<table border="1" width="280">
+ <tr align="center">
+ 	<td rowspan="2">1</td>
+ 	<td colspan="2">2</td>
+ 	<td rowspan="2">3</td>
+ 
+ </tr>
+ <tr align="center">
+ 	<td colspan="2">4</td>
+ </tr>
+ <tr align="center">
+ 	<td>5</td>
+ 	<td>6</td>
+ 	<td>7</td>
+ 	<td rowspan="2">8</td>
+  	
+ </tr>
+ <tr align="center">
+	<td>9</td>
+ 	<td colspan="2">10</td>
+ </tr>
+</table>
+<br><br>
+한 화면에서 여러 개의 html 문서를 보고자 할 경우 iframe 사용<br>
+<iframe src="test1.html" name="star" width="99%" height="300"></iframe>	<!-- height는 비율을 줄 수 없다. -->
+<br/>
+<a href="test2.html" target="star">test2 보기(iframe에서)</a>
+<p/>
+이미지 맵 : 이미지를 여러 영역으로 지정해 각 영역마다 link를 걸 수 있다.
+<br>
+<img src="images/snow.png" width="150" usemap="#snow">	<!-- 이미지에 대해서 snow라는 이름을 줌 -->
+<map name="snow">
+	<area shape="rect" coords="0,0,50,50" href="https://www.naver.com">
+	<area shape="rect" coords="10,100,100,200" href="https://www.w3.org">
+</map>
+</body>
+</html>

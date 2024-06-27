@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+클로저 : 클로저는 내부 함수에서 외부 하뭇의 범위에 대한 접근을 제공합니다.
+JavaScript에서 클로저는 함수 생성 시 함수가 생성될 때마다 생성됩니다.<br>
+클로저는 어떤 함수와 해당 함수가 선언된 렉시컬 환경의 조합이다.
+'상위함수' 보다 '하위함수'가 더 오래 살아있는 경우를 말한다.
+<hr>
+<script type="text/javascript">
+function func(){
+	let name = 'tom';	// 지역변수야 멤버필드 아니야ㅏ
+	let no = 1;	// 지역변수. 여기서 초기화가 되니까 no 값이 늘어났지만 다 tom1로 찍힌다.
+	
+	function displayName(){	// 내부 함수
+		console.log(name + no);
+		no++;	// no값 늘렸는데 왜 다 tom1이지?!?!?!
+	}
+	displayName();
+}
+
+func();	// tom1
+func();	// tom1
+func();	// tom1
+
+// 함수안에 있는 내용을 초기화하지 않고 유지하고 싶을때 클로저를 사용한다.
+// 클로저 사용
+// 내부 함수를 외부 함수 바깥에서 사용하는거
+function makeFunc(){	// 외부함수
+	let name = 'james';
+	let no = 1;
+	
+	function displayName(){	// 내부함수
+		console.log(name + no);
+		no++;
+	}
+	return displayName;	// 이게 클로저 : 내부 함수의 주소를 반환. 함수 이름 끝에 () 괄호 붙이지 마라ㅏㅏ 그건 실행값을 불러오는거다ㅏㅏㅏ
+}
+
+let myFunc = makeFunc();	// myFunc는 displayName 함수의 주소를 갖고있다.
+
+myFunc();	// james1
+myFunc();	// james2
+myFunc();	// james3
+
+function makeAdd(x){
+	return function(y){		// 함수의 실행 결과가 아니라 함수를 반환 => 결국은 주소가 반환된단 얘기	
+		return x + y;
+	}
+}
+
+let tot = makeAdd(5);	// 요 5는 고정
+console.log(tot(3));	// 8
+console.log(tot(5));	// 10
+let tot2 = makeAdd(10);
+console.log(tot2(3));	// 13
+console.log(tot2(5));	// 15
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+.focusOk{
+	background-color: #bbb;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('h1').css({'color':'red', 'text-decoration':'underline'}); // 복수일경우 중괄호안에 키:밸류 형식으로 적을 수도 있다.
+	$('h1').wrap('<i>')		// 감싸기 <i><h1>이벤트 기본 이해</h1></i>
+	
+	// 이벤트 ===
+	// 타겟을잡고.이벤트종류
+	$('input').focus(function(){// focus 이벤트		onfocus와 같다.
+		$(this).addClass('focusOk');	// addClass : 클래스를 준거
+	});	
+	$('input').blur(function(){	// onblur 이벤트	이벤트를 가지면	
+		$(this).removeClass('focusOk');
+	});		
+	
+	$('#btnOk').click(function(){	// 버튼을 클릭하면
+		event.preventDefault();	// 서버로 보내려고 하는 submit 기능 해제
+		$('#txtData').animate({		// txtData에  애니메이션 효과
+			width:'200px',
+			height:'50px'
+		}, 500);	// 애니메이션 처리시간 0.5초
+	});
+	
+	//$('a').click(function(e){		// onclick과 같다.
+	$('a').on('click',function(e){	// 이렇게 하면 이벤트 종류 복수로 사용도 가능.    위와 결과 동일	on('이벤트종류',...)
+		e.preventDefault();
+		//$('txtData').text('a 태그로 다른 작업');
+		console.log('a 태그로 다른 작업');
+	});
+	
+	$("#kbs").on("click", function(){
+		console.log($("#kbs").html());
+	});
+
+	$("#mbc").bind("click", function(){	// 이벤트 연결후 해제 가능
+		console.log($("#mbc").html());
+	
+		$("#mbc").unbind("click");	// 이벤트 해제
+	});
+});
+</script>
+
+
+</head>
+<body>
+<h1>이벤트 기본 이해</h1>
+<form>
+<!-- 이렇게 적으면 남남
+<label for="">자료 입력 : </label>
+<input type="text" id="txtData">
+ -->
+<!-- 이렇게 적으면 label은 id=txtData인 input과 한쌍 -->
+<label for="txtData">자료 입력 : </label>
+<input type="text" id="txtData">
+
+<input type="submit" id="btnOk" value="확인 버튼">
+</form>
+<br><br>
+<a href="https://www.naver.com">네이버</a>
+<br><br>
+<span id="kbs">대한민국 방송</span>
+<div id="mbc">만나면 좋은 친구</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>추가</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnIns").onclick = func;
+}
+
+function func(){
+	//alert("a");
+	if(frm.sang.value === ""){
+		alert("상품명 입력");
+		frm.sang.focus();
+		return;
+	}
+	// 수량 단가 ...
+	
+	frm.submit();
+}
+</script>
+</head>
+<body>
+*** 상품 추가 ***<p/>
+<form action="jsp16insert.jsp" method="post" name="frm">
+품명 : <input type="text" name="sang"><br>
+수량 : <input type="text" name="su"><br>
+단가 : <input type="text" name="dan"><br>
+<br>
+<input type="button" id="btnIns" value="상품 등록">
+</form>
+</body>
+</html>

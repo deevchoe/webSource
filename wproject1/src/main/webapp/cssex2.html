@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>layout</title>
+<style type="text/css">
+body {
+	width: 800px;
+	margin: 0 auto;
+}
+
+h2#title {text-align: center;}
+li.go_site {
+	float: left; width: 60px; margin-left: 5px;
+	list-style: none;
+}
+ul {list-style: none;}
+li a{display: block;}
+
+/*
+overflow 프로퍼티는 요소내의 컨텐츠가 너무 커서 요소내에 모두 보여주기 힘들때 그것을 어떻게 보여줄지를 지정
+auto : 컨텐츠량에 따라 스크롤바를 추가할지 자동으로 결정
+*/
+.head {
+	border-width:1px; width: 90%; overflow:auto;
+}
+
+
+nav {
+	float: left; width: 120px;
+}
+
+#contents {float: left; width: 400px;}
+
+#ad {float: left; width: 200px; font-size: 0.8em}	/* 0.8em : 현재 글꼴보다 약간 작아짐*/
+
+footer {margin-top:250px; clear: both;} /* clear : float을 해제함*/
+
+</style>
+</head>
+<body>
+<h2 id="title">* CSS로 화면 레이아웃 연습 *</h2>
+<header>
+	<h3> > 여기는 머리글</h3>
+	<ul class="head">
+		<li class="go_site"><a href="https://www.naver.com">네이버</a></li>
+		<li class="go_site"><a href="https://www.korea.com">코리아</a></li>
+		<li class="go_site"><a href="https://www.google.com">구우글</a></li>
+	</ul>
+</header>
+<nav>
+	<h3>항목 선택</h3>
+	<ul>
+		<li>메인</li>
+		<li>자동차</li>
+		<li>반도체</li>
+		<li>스포츠</li>
+		<li>기타</li>
+	</ul>
+</nav>
+
+<div id="contents">
+	<h3>핫 이슈</h3>
+	<span>
+		객체 지향 프로그래밍(영어: Object-Oriented Programming, OOP)은 컴퓨터 프로그래밍의 패러다임 중 하나이다. 객체 지향 프로그래밍은 컴퓨터 프로그램을 명령어의 목록으로 보는 시각에서 벗어나 여러 개의 독립된 단위, 즉 "객체"들의 모임으로 파악하고자 하는 것이다. 각각의 객체는 메시지를 주고받고, 데이터를 처리할 수 있다.
+		객체 지향 프로그래밍은 프로그램을 유연하고 변경이 쉽게 만들기 때문에 대규모 소프트웨어 개발에 많이 사용된다. 또한 프로그래밍을 더 배우기 쉽게 하고 소프트웨어 개발과 보수를 간편하게 하며, 보다 직관적인 코드 분석을 가능하게 하는 장점이 있다. 프로그램의 객체화 경향은 실제 세계의 모습을 그대로 반영하지 못한다는 비판을 받기도 한다.
+	</span>
+</div>
+
+<div id="ad">
+	<h3>광고글</h3>
+	<ul>
+		<li>애플</li>
+		<li>삼성</li>
+		<li>엘지</li>
+	</ul>
+</div>
+
+<footer> <!-- footer, nav, header는 다 div이다. 의미를 준것이다. footer는 아 나는 바닥글이구나~~ -->
+	<b>> 여기는 바닥글</b>&nbsp;&nbsp; 공지 사항을 주로 기술
+</footer>
+</body>
+</html>

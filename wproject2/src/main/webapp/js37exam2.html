@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>getpost</title>
+  <script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnEnter").onclick = postFunc;
+}
+
+function postFunc(){
+	let no = frm.empNo.value;
+	let irum = frm.empName.value;
+
+	// 입력자 오류 검사 - 정규표현식
+    const regExpNo = /^[0-9]*$/;
+    const regExpKor = /^[ㄱ-ㅎ|가-힣]/;
+    if (!regExpKor.test(irum) || !regExpNo.test(no)) {
+        alert("사번은 숫자, 이름은 한글만 입력 가능합니다!");
+        return;
+    } else {
+
+    }
+
+	// 객체 생성
+	xhr = new XMLHttpRequest();
+	xhr.open('post', 'js37exam2.jsp', true);
+
+	// 통신상태 확인 - 문제가 없으면 process()
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState  === 4) {
+			if (xhr.status === 200) {
+				postProcess();
+			} else {
+				alert("요청 실패 : " + xhr.status);
+			}
+
+		}
+
+	}
+	// 브라우저한테 알려주기
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+	xhr.send("empNo=" + no + "&empName=" + irum);
+}
+
+function postProcess(){
+	let data = xhr.responseText;
+	let parseData = JSON.parse(data);
+//	alert(data);
+
+	let str = "<table border='1'>";
+	str += "<tr><th>고객명</th><th>고객전화</th><th>성별</th></tr>";
+
+	// JSON 자료 읽어오기 - table tag
+	for (let i = 0 ; i < parseData.gogek.length ; i++) {
+			str += "<tr>";
+
+			if (parseData.gogek[i].gogek_gen == "남") {
+			str += "<td style=\"color: yellowgreen;\">" + parseData.gogek[i].gogek_name + "</td>";
+			} else {
+			str += "<td style=\"color: blue;\">" + parseData.gogek[i].gogek_name + "</td>";
+			}
+
+			str += "<td>" + parseData.gogek[i].gogek_tel + "</td>";
+			str += "<td>" + parseData.gogek[i].gogek_gen + "</td>";
+			str += "<tr>";
+	}
+
+
+	str += "</table>";
+	document.getElementById("show").innerHTML = str;
+
+}
+</script>
+</head>
+<body>
+<h2>Ajax get, post 요청</h2>
+<h3>직원 사번, 이름 입력 시 담당 고객 출력</h3>
+<form name="frm">
+  사번 : <input type="text" name="empNo" placeholder="숫자만 입력 가능"><br>
+  이름 : <input type="text" name="empName" placeholder="한글만 입력 가능">
+  <input type="button" value="관리 고객 확인" id="btnEnter">
+  <hr>
+  <div id="show"></div>
+</form>
+</body>
+</html>

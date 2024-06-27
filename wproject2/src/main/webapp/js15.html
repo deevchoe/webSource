@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//window.onload = function(){
+//}
+window.onload = () => {
+	document.getElementById("colorW").onclick=function(){
+		document.bgColor = "white";	
+	}
+	document.getElementById("colorG").onclick= () => {
+		document.bgColor = "#00ff00";
+	}
+	/*
+	document.getElementById("colorR").onclick= () => {
+		document.bgColor = "rgb(255, 0, 0)";	// rgb(100%, 0%, 0%)
+	}
+	*/
+	
+	// querySelector(css셀렉터)
+	document.querySelector("#colorR").onclick= () => {
+		document.bgColor = "rgb(255, 0, 0)";	// rgb(100%, 0%, 0%)
+	}
+	
+	document.querySelector(".hello").onclick = function(){	// 클릭 이벤트
+		document.querySelector("#show").innerText = "안녕하세요";
+	}
+	
+	document.querySelector("#calc").ondblclick = function(){	// 더블 클릭 이벤트
+		let ss = `연산결과는 ${10 + 20}`;
+		document.querySelector("#show").innerText = ss;
+	}
+	
+	// hover 기능
+	document.querySelector("#name").onmouseover = function(){	// 마우스 오버 아웃 이벤트
+		document.querySelector("#show").innerHTML = "<h1>난 홍길동</h1>";
+	}
+	document.querySelector("#name").onmouseout = function(){
+		document.querySelector("#show").innerHTML = "";
+	}
+	
+	// a tag : click 이벤트가 기본 등록됨
+	
+	document.querySelector("#daum").onclick = function(event){
+		event.preventDefault();	// 해당 태그의 고유 기능 해제
+		console.log(event);		// 이벤트 정보 확인
+		console.log(`x좌표 : ${event.x} y좌표 : ${event.y}`)
+	}
+	
+	// select
+	const sdata = document.querySelector("#sel");
+	/* 클릭할 때마다 값이 바뀜 -> 똑같은걸 또 클릭해도 발생
+	sdata.onclick = function(){
+		document.querySelector("#show").innerHTML = sdata.value;
+		console.log(sdata.value);
+	}
+	*/
+	
+	// 값이 변할때만 발생
+	sdata.onchange = function(){
+		document.querySelector("#show").innerHTML = sdata.value;
+		console.log(sdata.value);
+	}
+	
+};
+
+</script>
+</head>
+<body>
+* 여러 이벤트 경험 *
+<br>
+<input type="button" value="흰색" id="colorW">
+<!--  
+<input type="button" value="녹색" id="colorG">
+<input type="button" value="적색" id="colorR">
+-->
+<span id="colorG"> 녹색 </span>
+<b id="colorR" style="border:1px solid black; cursor : pointer;"> 적색 </b>
+<hr>
+이벤트 종류 연습<br>
+<button id="hello" class="hello">인사하기(click)</button>
+<button id="calc">계산하기(dblclick)</button>
+<button id="name">이름알기(mouseover)</button>
+
+<br>
+<a href="https://m.daum.net" id="daum">앵커 태그 클릭</a>
+<br>
+<select id="sel">
+	<option value="프로그래머">프로그래머</option>
+	<option value="웹퍼블리셔">웹퍼블리셔</option>
+	<option value="프로게이머">프로게이머</option>
+</select>
+
+<hr>
+<div id="show">출력장소1</div>
+</body>
+</html>

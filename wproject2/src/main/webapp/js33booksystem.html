@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>도서 관리 시스템</title>
+</head>
+<body>
+<h2>* 도서 관리 시스템 ver 0.9 *</h2>
+<script type="module">
+import Library from './js/Library.js';
+import Book from './js/Book.js';
+import Magazine from './js/Magazine.js';
+
+// 도서관을 생성
+const myLibrary = new Library('에이콘 도서관');
+
+// 2권의 책 생성 후 도서관에 입고
+const book1 = new Book('자바 몸으로 익히기', '익명', '111-0567'); 
+const book2 = new Book('SQL 머리로 익히기', '익명이', '111-0578'); 
+myLibrary.addItem(book1);
+myLibrary.addItem(book2);
+
+// 2권의 잡지 생성 후 도서관에 입고
+const magazine1 = new Magazine('자바 스크립트 월간', '지나가새우', '333-7878', 5);
+const magazine2 = new Magazine('프로그래밍 월간', '리처드쭈니', '333-5678', 3);
+myLibrary.addItem(magazine1);
+myLibrary.addItem(magazine2);
+
+// 도서관 책 목록 출력
+myLibrary.listItems();
+
+// 검색
+const foundItem = myLibrary.findItem('SQL 머리로 익히기');
+console.log(`찾은 책 : ${foundItem.toString()}`);
+</script>
+</body>
+</html>

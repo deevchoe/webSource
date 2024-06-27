@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jq8.js"></script>
+</head>
+<body>
+<h2>* 자동완성(Suggest) 기능 : 이름 검색 *</h2>
+<form name="frm">
+검색어 : <input type="text" name="keyword" id="kbs" onkeydown="sijak()"> <!-- onkeydown : 키보드를 눌렀을때 -->
+<br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+선택된 직원명 : <input type="text" name="sel" size="10">
+<input type="button" value="담당고객 출력">
+
+<div id="suggest" 
+	style="display: none; position: absolute; left: 70px; top: 130px;">
+	<div id="suggestList"></div>
+</div>
+</form>
+</body>
+</html>

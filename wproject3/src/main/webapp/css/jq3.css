@@ -1,0 +1,15 @@
+@charset "UTF-8";
+label{
+	float: left;
+	width: 120px;
+	text-align: left;
+}
+
+#userid, #age, #pwd1, #pwd2 {
+	width: 250px; 
+}
+
+.msg{
+	color: red;
+	padding-left: 2px;
+}

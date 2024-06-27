@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function func1(){
+	//alert("a");
+	let str1 = document.getElementById("test1").innerHTML;	// innerHTML 값을 얻은거 get
+	document.getElementById("show1").innerHTML = str1;	// innerHTML 값을 준거 set
+	document.getElementById("show2").innerHTML = "<i>" + str1 + "</i>";	// 받은 내용을 i 태그를 사용하여 변경 => i 태그도 활동했단 얘~기
+	
+	let mytag = "이름 :<input type='text' name='irum' />";
+	mytag += "<br>";
+	mytag += "나이 :<input type='text' name='nai' value='26' />";
+	document.getElementById("test1").innerHTML = mytag;
+}
+
+function func2(){
+	//alert("b");
+	let str2 = document.getElementById("test2").innerText;
+	document.getElementById("show1").innerText = str2;
+	document.getElementById("show2").innerText = "<i>" + str2 + "</i>";
+}
+</script>
+</head>
+<body>
+<h2>실행 중 tag 또는 데이터의 생성, 삭제, 수정, 참조 처리 가능</h2>
+<!-- 
+innerText : element 안의 text 값들만을 수정, 참조. tag도 text 처리
+innerHTML : element 안의 text에 HTML이나 XML이 있으면 기능 발휘
+DOM(Document Object Model) 기능을 일부 수행
+HTML요소를 JavaScript Object처럼 조작할 수 있는 Model이다.
+ -->
+<hr>
+<div id="test1"><h2>innerHTML 연습</h2></div>
+<div id="test2"><h2>안녕하세요</h2></div>
+<input type="button" value="처리 1" onclick="func1()">
+<input type="button" value="처리 2" onclick="func2()">
+<br>
+<div id="show1"></div>		<!-- 블럭단위 : div  => 아무 기능 없이 영역만을 확보하는 태그      구역 단위 : span -->
+<div id="show2"></div>
+</body>
+</html>

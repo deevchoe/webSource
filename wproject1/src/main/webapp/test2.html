@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지와 링크</title>
+</head>
+<body>
+이미지 출력<br>
+<img src="images/pic2.png" width="200" height="200" title="그림">
+<br>
+<img src="https://t1.daumcdn.net/daumtop_deco/images/pctop/2023/logo_daum.png">
+<br>
+<embed src="images/tetris.swf" autostart="true">
+<hr>
+a 태그 : 하이퍼 링크 가능<br>
+
+<!-- 현재 프레임을 덮어씌움 -->
+<a href="test1.html">test1 문서</a> 보기<br>
+<a href="http://127.0.0.1:80/wproject1/test1.html">test1 문서</a> 보기<br>
+<a href="test1.html" target="_self">test1 문서(_self)</a> 보기<br>
+
+<!-- 새로운 탭에 표시 -->
+<a href="test1.html" target="_new">test1 문서(_new)</a> 보기<br>	
+<a href="test1.html" target="_blank">test1 문서(_blank)</a> 보기<br>
+
+<a href="https://www.naver.com">네이버 출발</a><br>
+<a href="https://www.naver.com" target="_new">네이버 출발(_new)</a><br>
+
+<a href="test1.html">
+	<img title="연습" src="images/pic.jpg" width="300" height="200" title="그림">	
+</a><br>
+
+<a href="files/book1.xlsx">엑셀문서</a><br>	<!-- 브라우저는 엑셀을 해석할 수 없다. 브라우저는 자기가 해석할 수 없을때는 다운로드로 넘어간다.-->
+<a href="files/code.txt">텍스트문서</a><br>
+<a href="files/hello.txt">텍스트문서</a><br>	<!-- 404 file not found -->
+
+<a href="mailto:ch_ooi@naver.com">최지연에게 메일 전송</a>
+<hr>
+
+<!-- 서버에서 막아놨기 때문에 외부에서 호출할 수 없는 영역 -->
+<a href="META-INF/aaa.html">META-INF 폴더 내 파일</a><br>
+<a href="WEB-INF/bbb.html">WEB-INF 폴더 내 파일</a><br>
+
+<a href="kbs/a.html">kbs 폴더</a><br> 
+<a href="/wpro1/kbs/a.html">kbs 폴더</a><br>
+
+<a href="/kbs/a.html">kbs 폴더</a><br>	<!-- 404 err : localhost/kbs/a.html -->
+<!-- / : 현재 컨텍스트의 root를 야기함 -->
+<br>
+<a href="kbs/sbs/b.html">sbs 폴더</a><br>
+<a href="kbs/sbs/tvn/c.html">tvn 폴더</a><br>
+
+
+<pre>
+.
+.
+.
+.
+.
+</pre>
+
+
+</body>
+</html>

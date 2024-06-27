@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnSend").onclick = chkData;
+	document.querySelector("#btnClear").onclick = clsData;
+}
+
+function chkData(e){
+	e.preventDefault();	// submit의 기능을 정지하여 jsp로 안넘어감
+	//alert("a");
+	
+	// 입력 자료 오류 검사 후 서버로 자료 전송
+	if(frm.name.value === "" || isNaN(frm.name.value) === false){
+		frm.name.focus();
+		alert("이름을 입력하세요");
+		return;
+	}
+
+	if(frm.id.value.length < 3){
+		frm.id.focus();
+		alert("id는 3자 이상 입력하세요");
+		return;
+	}
+	
+	// 정규표현식 - 여러 용도 중 입력 자료 검사용. 대량의 데이터를 가지고 작업할때도 너무나도 중요하다. 모든 언어에 있다.
+	// https://cafe.daum.net/flowlife/QbpR/40
+	let str = "123Abc가나다45홍 asdf1 23길동";
+	console.log(str.match(/[1]/));	// 반환값은 배열. 최초의 1개만 반환        match() 일치하는 걸 찾음
+	console.log(str.match(/[1]/g));	// 해당되는 모든 값 반환
+	console.log(str.match(/[0-9]/g));	// 숫자만 반환
+	console.log(str.match(/[\d]/g));	// 위와 동일
+	console.log(str.match(/[0-9 ]/g));	// 숫자, 공백 반환
+	console.log(str.match(/[가나]/g));
+	console.log(str.match(/[가-힣]/g));	// 한글은 몽땅 한글자 단위로 반환  ['가', '나', '다', '홍','길','동']
+	console.log(str.match(/[a-zA-Z0-9]/g));	// 영문, 숫자만 반환
+	console.log(str.match(/[a-z]/gi));	// i : 대소문자 구분 X. 모든 영문자 반환
+	console.log(str.match(/[가-힣]+/g));		// 한글(새로운 문자가 나오기전까지) 문자열이 된다. 단어가 잡히는거.  ['가나다', '홍', '길동']
+	console.log(str.match(/\d{2}/g))	// 숫자 연속 2자만 해당 ['12', '45', '23']
+	console.log(str.match(/\d{2,3}/g))	// 숫자 연속 2 또는 3자만 ['123', '45', '23']
+	// ------------------------------------------------------------------
+	
+	// 이메일 검사
+	var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	if(!frm.email.value.match(regExp)){
+		frm.email.focus();
+		alert("이메일을 정확히 입력하세요");
+		return;
+	}
+	
+	// 나이 검사
+	let regExp2 = /^[0-9]{1,2}$/;
+	if(!frm.age.value.match(regExp2)){
+		frm.age.focus();
+		alert("나이는 숫자만 입력하세요");
+		return;
+	}
+	
+	frm.action = "js17form.jsp";
+	frm.method = "post";
+	frm.submit();
+}
+
+function clsData(){	// reset + 추가 기능   
+	alert("b");
+	
+	//frm.name.focus();
+	document.querySelector("#name").focus();	// 위와 결과 동일
+}
+</script>
+</head>
+<body>
+** 개인 자료 입력 ** <br>
+<!-- 
+<form action="js17form.jsp" name="frm" method="post">
+ -->
+<form name="frm">
+<table class="table table-dark table-hover">
+	<tr>
+		<td>이 름</td>
+		<td><input type="text" id="name" value="홍길동"></td>
+	</tr>
+	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="id" placeholder="3자 이상"></td>
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td><input type="text" name="email"></td>
+	</tr>
+	<tr>
+		<td>나 이</td>
+		<td><input type="text" name="age" maxlength="2"></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align : center;">
+			<input type="submit" id="btnSend" value="자료 전송" class="btn btn-dark"><!-- submit은 자바스크립트 기능을 하여 누르면 jsp로 넘어감 -->
+			<!--  <input type="button" id="btnSend" value="자료 전송"> --><!-- button은 기능을 안해! 버튼 모양만 있을 뿐이야! -->
+			<input type="reset" id="btnClear" value="자료 삭제" class="btn btn-link">
+		</td>
+	</tr>
+</table>
+</form>
+<button type="button" class="btn">Basic</button>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-link">Link</button>
+
+<br><br>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  대화상자
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

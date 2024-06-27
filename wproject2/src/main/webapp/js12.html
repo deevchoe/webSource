@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function colorFunc(){
+	//alert("a");
+	//alert(document.frm.selBc.value);	// 문서 전체를 document라 한다.
+	document.body.bgColor = document.frm.selBc.value;
+	document.body.text = frm.selTc.value;	// document 생략가능
+}
+</script>
+</head>
+<body>
+<h2>이벤트 연습</h2>
+<form name="frm">
+<table border="1">
+	<tr>
+		<td colspan="2">색상 선택</td>
+	</tr>
+	<tr>
+		<td><b>배경색 : </b></td>
+		<td>
+			<select name="selBc">
+				<option value="black">검정</option>
+				<option value="blue">파랑</option>
+				<option value="green">초록</option>
+				<option value="white" selected="selected">하양</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td><b>글자색 : </b></td>
+		<td>
+			<select name="selTc">
+				<option value="black" selected="selected">검정</option>
+				<option value="blue">파랑</option>
+				<option value="green">초록</option>
+				<option value="white">하양</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: center;">
+			<input type="button" value="변경 확인" 
+				onclick="colorFunc()">
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

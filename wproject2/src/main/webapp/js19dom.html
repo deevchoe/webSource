@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.getElementById("sel").onchange = function(){
+		let sangpum = comments = "";
+		
+		const sel = frm.sel.options[frm.sel.selectedIndex].value;
+		console.log(sel);
+		const sang = frm.sel.options[frm.sel.selectedIndex].text;
+		console.log(sang);
+		
+		if(sel === '10'){
+			sangpum = sang;
+			comments = '클릭이 부드럽게 잘됨';
+		}else if(sel === '20'){
+			sangpum = sang;
+			comments = '키감이 나이스';
+		}else if(sel === '30'){
+			sangpum = sang;
+			comments = '화질이 우수함';
+		}
+		
+		console.log(sangpum, ' ', comments);
+		
+		addRow(sangpum, comments);	// tr 추가
+		
+		// table에 border 속성 추가
+		document.getElementById("myTable").setAttribute("border", 1);
+	}
+	
+	// 제목 출력
+	let h = document.createElement('h2');
+	let t = document.createTextNode('결과는');
+	h.appendChild(t);
+	document.getElementById("header").appendChild(h);
+}
+
+function addRow(sangpum, comments){
+	// <tr> 생성
+	let row = document.createElement('tr');
+	let col = addCol(sangpum);
+	row.appendChild(col);	// <tr><td>상품명</td></tr>
+	col = addCol(comments);
+	row.appendChild(col);	// <tr><td>상품명</td><td>설명</td></tr>
+
+	document.getElementById("myTbody").appendChild(row);
+}
+
+function addCol(para){
+	// <td> 생성
+	let col = document.createElement('td');
+	let ctext = document.createTextNode(para);
+	col.appendChild(ctext);
+	return col; // <td>값</td>
+}
+</script>
+</head>
+<body>
+<h2>** tag 생성 관련 **</h2>
+<form action="#" name="frm">	 <!-- action="#" 갈 곳이 없을때 # 씀 -->
+상품 선택 : 
+<select name="sel" id="sel">
+	<option value="">선택</option>
+	<option value="10">마우스</option>
+	<option value="20">키보드</option>
+	<option value="30">모니터</option>
+</select>
+</form>
+<br>
+<span id="header"></span>
+<table id="myTable">
+	<tbody id="myTbody"></tbody>
+
+</table>
+</body>
+</html>

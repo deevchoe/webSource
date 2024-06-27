@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	// 1. new 연산자 사용
+	let obj1 = new Object();	// 객체 생성자를 사용한 것
+	//let obj1 ={};	// 위와 동일. Object의 기본 멤버를 갖는다.
+	obj1.irum = '신기해';
+	obj1.nai = 23;
+	obj1.juso = '강남구 역삼동';
+	obj1.getJuso = function(){return obj1.juso};	// 펑션이라 하지 않고 method라 함
+	
+	console.log(typeof obj1);	// Object
+	console.log(obj1);	// 다음과 같이 key:value 형식으로 되어있다. 이를 JSON format이라 한다.{irum: '신기해', nai: 23, juso: '강남구 역삼동', getJuso: ƒ}
+	console.log(obj1.toString());
+	
+	let str1 = `${obj1.irum} 님의 나이는 ${obj1.nai}이고 주소는 ${obj1.getJuso()}`;
+	document.querySelector("#disp1").innerHTML = str1;
+	
+	let obj2 = obj1;	// 주소 복사
+	obj2.irum = '신선해'; 	// obj1도 변경됨
+	let str2 = `${obj2.irum} 님의 나이는 ${obj2.nai}이고 주소는 ${obj2.getJuso()}`;
+	document.querySelector("#disp2").innerHTML = str2;
+	
+	// 2. literal(data) 사용 => 중괄호 안에 key:value 형태로 집어넣음
+	let myObj = {
+		irum:'홍길동',	// key:value 형태(JSON)의 property로 구성
+		nai:33,
+		showNai:function(msg){
+			return this.nai + msg;	// this:메소드 내부에서 객체 멤버에 접근을 가능하게 함
+		},
+	};
+	// this는 바인딩이 객체가 생성되는 시점에 결정된다.
+	// 일반 함수 호출 시 this가 최상위 객체(global 또는 window)를 가리킨다.
+	// 메소드를 호출 시 호출된 객체를 가리킨다.
+	// new 키워드를 사용해 객체를 생성했을 때는 해당 객체를 가리킨다.
+	
+	console.log(typeof myObj);	// Object
+	console.log(myObj);	// 다음과 같이 key:value 형식으로 되어있다. 이를 JSON format이라 한다.{irum: '신기해', nai: 23, juso: '강남구 역삼동', getJuso: ƒ}
+	console.log(myObj.toString());
+	let str3 = `${myObj.irum} 님의 나이는 ${myObj.nai}이고 주소는 ${myObj.showNai('살')}`;
+	document.querySelector("#disp3").innerHTML = str3;
+	
+	// 함수를 별도 작성후 객체에 할당도 가능
+	// ex1)
+	let users = {
+			name:'tom',
+			age:25,
+	};
+	users.sayHi = function(){
+		console.log('안녕');
+	}
+	console.log(users);		// {name: 'tom', age: 25, sayHi: ƒ}
+
+	// ex2)
+	let users2 = {
+			name : 'oscar',
+			age:25,
+	};
+	function sayHi2(){
+		console.log('안녕2');
+	}
+	users2.sayHi = sayHi2;	// 일반함수를 메소드로 등록
+	console.log(users2);
+	users2.sayHi();
+	
+	console.log('--------------------');
+	// 간단 계산기 작성
+	let calculator = {
+			//let a = 0;	// 자바같은 경우에는 사전에 선언해줘야 하는데 자바스크립트는 필요없다.
+			sum(){
+				return this.a + this.b;
+			},
+			mul(){
+				return this.a * this.b;
+			},
+			read(){
+				//this.a = +prompt('숫자1:', 1);
+				this.a = 1;
+				//this.b = +prompt('숫자2:', 2);
+				this.b = 2;
+			}
+	};
+	calculator.read();
+	console.log(`더하기 : ${calculator.sum()}`);
+	console.log(`곱하기 : ${calculator.mul()}`);
+	
+	console.log('---중첩 객체-----------------');
+	let myFriend = {
+			name : '손오공',
+			age : 23,
+			otherFriend : {
+				name:'박치기',
+				job:'프로그래머',
+			}
+	};
+	let str4 = `${myFriend.name} 님의 나이는 ${myFriend.age} 
+					다른 친구는 ${myFriend.otherFriend.name} 입니다.`;
+	document.querySelector("#disp4").innerHTML = str4;
+	
+	// 3. 생성자 함수를 사용
+	function Person(name){	// 함수는 대문자로 시작(약속~)
+		this.name = name;
+		this.setName = function(newName){
+			this.name = newName;
+		};
+	}
+	
+	let pp = new Person('사오정');	// 생성자 함수를 통해 새로운 값을 계속 입력 가능
+	document.querySelector("#disp5").innerHTML = pp.name;
+	let pp2 = new Person();	// let pp2 = new Person; 같은 의미
+	document.querySelector("#disp6").innerHTML = pp.name;
+	
+	pp2.setName('저팔계');
+	document.querySelector("#disp7").innerHTML = pp2.name + " " + pp2['name'];
+
+	console.log('~~~');
+	function MakeUser(name, age){
+		return{
+			//name:name,
+			name,	// property 단축 구문
+			age,
+		}
+	}
+	let user1 = MakeUser('길동', 22);
+	document.querySelector("#disp8").innerHTML = user1.name + ' ' + user1['age'];
+	user1 = null;	// 도달 불가능한 객체이므로 GarbageCollector에 의해 메모리 해제
+	
+	console.log('---배열 객체-----------------');
+	let arr1 = [];
+	let arr2 = new Array();
+	console.log(arr1.constructor);
+	console.log(arr2.constructor);
+	
+	arr1.push('a');
+	arr1.push('c');
+	arr1.push('b');
+	document.querySelector("#disp9").innerHTML = arr1.sort(); // arr1.reverse()
+}
+</script>
+</head>
+<body>
+객체 생성 후 처리<hr>
+<div id="disp1"></div>
+<div id="disp2"></div>
+<div id="disp3"></div>
+<div id="disp4"></div>
+<div id="disp5"></div>
+<div id="disp6"></div>
+<div id="disp7"></div>
+<div id="disp8"></div>
+<div id="disp9"></div>
+</body>
+</html>

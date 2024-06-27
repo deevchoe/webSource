@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* 주~석 */
+
+#i2{
+	background-color: yellow;
+	color: red;
+	font-size: 20px;
+}
+
+/* 엘리먼트 2개 잡음. h1과 h2*/
+h1, h2{
+	text-decoration: line-through; /* 취소선 */
+}
+
+table{width : 70%; margin-bottom: 10px; border: 1px solid #dddddd;}
+/* 테이블의 자식으로 tr이 있고 tr의 자식으로 td가 있다. 스타일 적용 대상은 td */
+/* table, tr, td => 스타일 적용 대상은 table과 tr과 td */
+/* 공백으로 구분 : 부모 자식      쉼표로 구분 : 여러개 */
+table tr td {
+	padding: 5px 10px; border-top : 1px dotted rgb(0, 0, 255);
+				border-bottom:3px double rgb(255,0,0);
+}
+
+input {
+	border: 5px solid; background-color: rgb(90%0%,60%);
+}
+
+input.btnOk { /* 클래스에 적용 input 엘리먼트 중에서 클래스가 btnOk인 애가 적용 대상*/
+	border: 1px dotted; background-color: pink;
+}
+
+/* 동적 선택자 */
+input:focus {
+	background-color: #aabbcc;
+}
+
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	color: red;
+}
+a:active {
+	color:yellow; font-family: 궁서;
+}
+a:hover { /* 마우스 over, out 시  하버가 over, out*/
+	font-size: 30px; cursor:crosshair;
+}
+
+i, strong { /* i태그 & strong 태그*/
+	color: #000; background-color: silver;
+}
+
+b{font-size : 8px;}
+div b{font-size : 16px;} /* div의 자손 b 태그. div 태그에 속해있기만 하면 됨*/
+div > b {font-size: 24px; } /* div의 직계자식 b태그 */
+div span b{font-size: 32px;} /* div의 자손으로 span이 있고 span의 자손인 d */
+
+div b#hi{font-size: 40px;} /* div 태그의 b태그가 포함되어 있을거야 그 중에 id가 hi인 애 */
+div b.hello{font-size: 46px;} /* div 태그의 b태그가 포함되어 있을거야 그 중에 class가 hello인 애 */
+
+div#pic{
+	height: 130px; background-color: pink; /* 배경 이미지를 아래서 줬기 때문에 여기 쓰인 background-color는 아무 상관 없는거 */
+	background-image: url('../images/snow.png'); /* 배경으로 깔아줌 */
+}
+
+img {
+	border: 10px dotted pink;
+}

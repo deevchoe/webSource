@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>반복문 while</h2>
+<script type="text/javascript">
+let a = 1;
+while(a <= 5){
+	document.write("반복");
+	a++;
+}
+document.write(`<br>반복문 탈출 후 a : ${a}`);
+
+document.write('<br>');
+let b = 10;
+do{
+	document.write(`<br>최소 1회 실행`);
+	b++;
+}while(b <= 5)
+</script>
+<br>별도 작성된 js 문서 읽기
+<script type="text/javascript" src="js/js4.js"></script>
+<hr>
+
+<script type="text/javascript">
+let k = 0;
+while(k <= 10){
+	k++;
+	if(k === 3 || k === 5) continue;
+	document.write(`k : ${k}&nbsp;&nbsp;`);
+	if(k === 7) break;
+}
+
+document.write("<p>");
+while(true){
+	let nai = +prompt("나이 입력 : ","0");	// show input dialogue
+	nai = nai - nai % 10;
+	//document.write(`나이는 ${nai}대`);
+	console.log(`나이는 ${nai}대`)
+	let result = confirm('계속할까요');	// show confirm dialogue
+	if(result === false) break;
+}
+alert('여기까지~~~');		// show message dialog
+</script>
+
+</body>
+</html>

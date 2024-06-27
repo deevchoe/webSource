@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>요소 동적 생성</title>
+<script>
+var table_count = new Array()
+var count = 0;
+var cnt = 0;
+var data_name="";
+var city="";
+table_count[0] = 0;
+
+function select_chang(country,selt,index) { 
+  var selt  = "document.select_form.formselect" + selt;
+  var frameobj = eval(selt);
+
+  document.select_form.reset(); // select 문의 선택을 reset 한다
+  frameobj.options[index].selected = true; // 선택된 것만 보여진다.
+
+  data_name = country;
+  city = frameobj.options[index].value;
+  addRow('tlist');
+}
+
+function addRow(TableID){ // 테이블 동적 생성
+  count++;
+  cnt++;
+  table_count[cnt] = count;
+
+  var tbody = document.getElementById(TableID).getElementsByTagName("TBODY")[0];
+  var row = document.createElement("TR");
+
+  var td1 = document.createElement("TD");
+
+  td1body = "<p align='center'>"+ data_name +"</p>";
+
+  //innerHTML()보다 훨씬 빠른 insertAdjacentHTML()
+  td1.insertAdjacentHTML('beforeEnd', td1body );
+
+  var td2 = document.createElement("TD");
+  td2body = "<p align='center'>"+ city + "</p>";
+  td2.insertAdjacentHTML('beforeEnd', td2body);
+
+  var td3 = document.createElement("TD");
+  td6body = "<p align='center'><input type='button' value='삭제' style='border-width:1px; border-style:solid;' onclick=delRow('" + 
+		  	TableID + "'," + table_count[cnt] +")></p>";
+  td3.insertAdjacentHTML('beforeEnd', td6body);
+
+  row.appendChild(td1);
+  row.appendChild(td2);
+  row.appendChild(td3);
+  tbody.appendChild(row);
+}
+
+function delRow(TableID,num){ // 테이블의 특정 위치를 삭제
+  var tbody = document.getElementById(TableID).getElementsByTagName("TBODY")[0];
+  
+  for ( var i = 1; i < table_count.length; i++ ){
+    if ( table_count[i] == num ){
+	   tbody.deleteRow(i); // 테이블 삭제
+       table_count[i] = 0;
+    }
+  }
+
+  for ( var i = 1; i < table_count.length ; i++ ){ // 위치를 지정하여 이동.
+     if ( table_count[i] == 0){  
+    	cnt = tbody.rows.length-1;
+     	for ( j = i ; j < table_count.length ; j++)
+           table_count[j] = table_count[j+1];
+ 	 }
+  }
+}
+
+function cancel(TableID){ // 테이블 전체 삭제
+  var tbody = document.getElementById(TableID).getElementsByTagName("TBODY")[0];
+  var del_cnt = tbody.rows.length;
+
+  for ( var i = 1; i < del_cnt; i++ ){  
+    tbody.deleteRow(1); // 테이블 삭제
+  }
+  cnt = 0; // 테이블 관련 번호를 초기화
+}
+</script>
+</head>
+<body>
+<form name=select_form>
+	<table>
+		<tr>
+			<td>동물</td>
+			<td>식물</td>
+		</tr>
+		<tr>
+			<td>
+				<select name="formselect0" size="5"
+					onchange="select_chang('동물',0,selectedIndex)">
+					<option value="호랑이">호랑이</option>
+					<option value="개">개</option>
+					<option value="소">소</option>
+					<option value="돼지">돼지</option>
+				</select> 
+			</td>
+			<td>
+				<select name="formselect1" size="5"
+					onchange="select_chang('식물',1,selectedIndex)">
+					<option value="장미">장미</option>
+					<option value="백합">백합</option>
+					<option value="해바라기">해바라기</option>
+					<option value="코스모스">코스모스</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<input type="button" value="전체삭제" onclick="cancel('tlist')">
+	<br><br>
+	<table id="tlist" width="230">
+		<tbody>
+			<tr>
+				<td style="background-color:silver;">
+					<p align="center">대분류</p>
+				</td>
+				<td style="background-color:silver;">
+					<p align="center">소분류</p>
+				</td>
+				<td style="background-color:silver;">
+					<p align="center">비고</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+</body>
+</html>
+

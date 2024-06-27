@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnShow").addEventListener("click", func);
+	document.querySelector("#btnNmonth").addEventListener("click", showNextMonth);
+	
+};
+
+function func(){
+	//alert("a");
+	let now = new Date();	// 객체 생성		오늘 날짜
+	let year = now.getFullYear();	// getFullYear() - 년도 불러오기
+	let month = now.getMonth();	// getMonth() - 달 불러오기
+	//let month = now.getMonth(now.getMonth() + 1);
+	let day = now.getDate();	// getData() - 오늘 날짜 불러오기
+	console.log(`${year} ${month + 1} ${day} `);
+	
+	// 현재 월의 1일은 무슨 요일인가가 중요! 그래야 시작점을 잡을 수 있으니깐
+	let setDate = new Date(year, month, 1);
+	let firstDay = setDate.getDate();
+	console.log(firstDay);	// 결과값 : 1 firstDay는 1일이니까
+	let yoil = setDate.getDay();	// 요일 반환 0(일) ~ 6(토)까지의 값을 반환
+	console.log(yoil);	// 결과값 : 3 => 수요일
+	
+	// 현재 월의 날 수는 몇 일?
+	const nalsu = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+	
+	// 2월 날 수는 윤년 체크를 해줘야 한다.
+	if(year % 4 === 0 && 100 !== 0 || year % 400 === 0){	// 윤년의 조건
+		nalsu[1] = 29;
+		// const는 값을 바꿀 수 없는데 왜 에러가 안떨어지나요?
+		// 객체 안에 들어있는 멤버는 수정할 수 있다. 참조형은 참조 대상은 못 바꾼다. 참조 대상 안에 들어가있는 멤버는 바꿀 수 있다.
+	}
+	
+	let str = makeCalendar(yoil, nalsu[month], year, month + 1, day);
+	document.querySelector("#disp").innerHTML = str;
+	
+	document.querySelector("#etc").style.display = ""; // 숨어있던 버튼이 등장
+	document.querySelector("#btnShow").style.display = "none";
+	
+	if(now.getMonth()+1==12){
+		
+	}
+}
+
+function makeCalendar(yoil, nalsu, year, month, day){
+	let str = `<table border='1'>`;
+	str += `<tr><th colspan='7'>${year}년 ${month}월</th></tr>`
+	str += `<tr>`;
+	let week = new Array("일", "월", "화", "수", "목", "금", "토");
+	for(let i = 0; i < week.length; i++){
+		str += `<th>${week[i]}</th>`;
+	}
+	str += `</tr>`;	// 년월 요일명 출력 완료
+	
+	// 날 수 채우기 ------------------------------------------------
+	let no = 1;
+	let currentCell = 0;	// td를 cell이라 함
+	// 이번 달은 몇 주?	이걸 알아야 tr의 갯수가 나오잖아ㅏ
+	let ju = Math.ceil((nalsu + yoil) / 7);	// 올림 함수  소수 이하 버리고 간다.   floor() round() 함수와 세트
+	console.log(`이번 달은 ${ju} 주`);
+	
+	for(let r = 0; r < ju; r++){	// 행
+		str += `<tr style = 'text-align:center'>`;
+		for(let col = 0; col < 7; col++) {	// 열
+			if(currentCell < yoil || no > nalsu){	// 예) 첫 주에 1일이 수요일이면 이전은 공백 처리, 날 수까지만 출력
+				str += `<td>&nbsp;</td>`;
+				currentCell++;
+			}else{
+				if(no === day) {	// 오늘은 글자색을 파랑으로 표시
+					str += `<td style='color:blue'>${no}</td>`;
+				}else{
+					str += `<td>${no}</td>`;
+				}
+				no++;
+			}
+		}
+		str += `</tr>`;
+	}
+	
+	str += `</tr>`;
+	str += `</table>`;
+	return str;
+}
+
+function showNextMonth(){
+	let now = new Date();	// 현재 날짜를 가져옴
+	let nextYear = now.getFullYear();	// getFullYear() - 년도 불러오기
+	let nextMonth = now.getMonth() + 1;	// 다음 달의 인덱스를 구함 (현재 달의 인덱스 + 1)
+
+	let str = makeCalendar(new Date(nextYear,nextMonth));
+	document.querySelector("#disp").innerHTML = str;
+}
+</script>
+</head>
+<body>
+<button id="btnShow">달력보기</button>
+
+<div id="etc" style="display: none;">
+	<button id="btnPyear">이전 년</button>
+	<button id="btnPmonth">이전 월</button>
+	<button id="btnNmonth">다음 월</button>
+	<button id="btnNyear">다음 년</button>
+</div>
+<br><br>
+<div id="disp"></div>	<!-- 여기에 달력을 표시하기로 함 -->
+
+
+</body>
+</html>

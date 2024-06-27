@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>간단 계산기</title>
+<style>
+table {
+	border-collapse: collapse;
+}
+
+td {
+	padding: 5px 10px;
+	text-align: center;
+}
+
+input {
+	text-align: right;
+	border: none;
+}
+
+input:focus {
+	outline: none;
+}
+</style>
+<script type="text/javascript">
+function clearDisplay() {
+    document.getElementById('display').value = '';
+    document.getElementById('result').value = '';
+}
+
+/*
+addNum() 함수는 사용자가 숫자 버튼을 누를 때마다 그 숫자를 입력창에 추가한다.
+addOper 함수는 사용자가 연산자 버튼을 누를 때 연산자를 입력창에 추가하거나,
+만약 마지막 문자가 이미 연산자라면 그것을 새로운 연산자로 교체한다.
+ */
+
+function addNum(number) {	// addNum() 함수의 매개변수로 'number'를 받는다.
+    document.getElementById('display').value += number;	
+    // HTML 요소에서 'display'라는 ID를 가진 요소를 찾고, 그 요소의 현재 값에 'number'를 추가한다.
+	// 예를 들어, 사용자가 버튼을 눌러 숫자 '5'를 입력하면, 'display' 요소의 값 끝에 '5'가 추가 된다.
+}
+function addOper(operator){	// addOper() 함수의 매개변수로 'operator'를 받는다.
+	const display = document.getElementById('display');	// 디스플레이 값을 받아두고
+	// 'display'라는 ID를 가진 HTML 요소를 찾고 변수 'display'에 저장한다.
+	const lastChar = display.value[display.value.length - 1];	// 중복 연산자 제거...?
+	// 'display' 요소의 현재 값의 마지막 문자를 'lastChar' 변수에 저장한다.
+	if(['+','-','*','/'].includes(lastChar)){	// 마지막 문자가 '+','-','*','/' 중 하나인지 확인한다.
+		display.value = display.value.slice(0, -1) + operator;
+		// 만약 마지막 문자가 연산자라면, 마지막 문자를 제거하고 새로운 연산자로 교체한다.
+		// 예를 들어, 현재 'display' 값이 '12+'이고 새로운 연산자로 '*'가 입력되면, 'display' 값은 '12*'로 변경된다.
+	} else {
+		display.value += operator;
+		// 새로운 연산자를 'display' 값 끝에 추가한다.
+		// 예를 들어, 현재 'display' 값이 '12'이고 새로운 연산자로 '+'가 입력되면, 'display' 값은 '12+'로 변경된다.
+	}
+}
+
+function calculateResult() {
+	const display = document.getElementById('display').value;	// HTML 요소에서 'display'라는 ID를 가진 요소의 값을 가져온다. 이 값은 사용자가 입력한 수식이다.
+	if(display.includes('/0')){	// 수식에 '/0'(0으로 나누기)가 포함되어 있는지 확인한다.
+		alert("0으로 나눌 수 없습니다");
+		clearDisplay();
+	}else{	// 0으로 나누기가 포함되지 않았을 때 실행되는 부분
+		try{
+			const result = eval(display);	// eval 함수 : ("5 + 3은 문자열인데 eval 함수가 수치로 연산한다.")	eval 함수를 사용하여 수식을 계산
+			if(result < 0) {
+				alert("음수는 허용되지 않습니다");
+				clearDisplay();
+			} else {	// 결과가 음수가 아닌 경우
+				document.getElementById('result').value = result;	// 결과를 'result'라는 ID를 가진 HTML 요소에 표시한다.
+			}
+		} catch (e) {
+			document.getElementById('result').value = 'Error';
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td colspan="4"><input type="text" id="display"
+				placeholder="display" readonly></td>
+		</tr>
+		
+		<tr>
+			<td colspan="4"><input type="text" id="result"
+				placeholder="result" readonly></td>
+		</tr>
+
+		<tr>
+			<td colspan="3" onclick="clearDisplay()">AC</td>
+			<td onclick="addOper('/')">/</td>
+		</tr>
+
+		<tr>
+			<td onclick="addNum('7')">7</td>
+			<td onclick="addNum('8')">8</td>
+			<td onclick="addNum('9')">9</td>
+			<td onclick="addOper('*')">*</td>
+		</tr>
+
+		<tr>
+			<td onclick="addNum('4')">4</td>
+			<td onclick="addNum('5')">5</td>
+			<td onclick="addNum('6')">6</td>
+			<td onclick="addOper('-')">-</td>
+		</tr>
+
+		<tr>
+			<td onclick="addNum('1')">1</td>
+			<td onclick="addNum('2')">2</td>
+			<td onclick="addNum('3')">3</td>
+			<td onclick="addOper('+')">+</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" onclick="addNum('0')">0</td>
+			<td onclick="addNum('.')">.</td>
+			<td onclick="calculateResult()">=</td>
+		</tr>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+별도 작성된 js파일, 모듈 읽기
+<!-- 
+일반적으로 js 코드를 별도의 파일로 작성 후 (파일명.js)
+<script src="경로명및파일명">으로 읽어 사용한다.
+
+그런데 모듈들을 사용할 수도 있다. 모듈은 프로그램을 구성하는 구성요소의 일부를 말한다.
+스크립트의 크기가 점차 커지고 기능이 복잡해지자 자바스크립트 커뮤니티는 라이브러리를 만들어서
+파일로 저장 후 필요한 모듈을 언제든지 불러올 수 있도록 하거나 모듈로 쉽게 분리 할 수 있는 방법들을 제시했다.
+export, import를 사용해 모듈을 내보내고 읽을 수 있다.
+ -->
+<script type="text/javascript" src="js/js32.js"></script>
+<script type="text/javascript">
+kbsFunc();
+</script>
+
+<script type="module">
+import {user} from './js/js32module.js';
+import {msg} from './js/js32module.js';
+import {sayHi} from './js/js32module.js';
+import {func} from './js/js32module.js';
+import {f1, f2} from './js/js32module.js';
+
+import defau from './js/js32module.js';
+import {months} from './js/js32module.js';
+import {Cur_YEAR} from './js/js32module.js';
+import {HelloClass} from './js/js32module.js';
+
+console.log('------------');
+console.log(user);
+console.log(msg.name, ' ', msg['price']);
+
+console.log('--------------------------');
+console.log(sayHi('신기해'));
+console.log(func(3, 4));
+console.log(f1('신기해'));
+console.log(f2('신기루'));
+
+console.log(defau);
+
+console.log('--------------');
+console.log(months[0] + ' ' + months[1]);
+console.log(Cur_YEAR);
+
+let hello = new HelloClass('모듈 연습 중');
+console.log(hello.msg);
+</script>
+
+<script type="text/javascript">
+async function dyFunc(){
+	let say = await import ('./js/js32module.js');
+	say.hi();
+	say.bye();
+}
+</script>
+<button onclick="dyFunc()">비동기로 모듈처리</button>
+</body>
+</html>

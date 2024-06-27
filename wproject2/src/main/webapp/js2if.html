@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>조건 판단문 if</h2>
+<script type="text/javascript">
+const irum = '한국인';
+if(irum === '한국인'){
+	document.write("맞아!");
+}else{
+	document.write("아닌뎁");
+}
+
+document.write("<br>")
+
+//let res = +prompt("점수 입력 : ", "80");	// 초기치는 80을 줬다.  prompt를 쓰면 창이 뜬다.
+let res = +"67";
+let re = res + 5;
+if(re >= 90){
+	document.write(`점수가 ${re}이므로 <b style='color:pink'>상</b>`);	
+}else if(re >= 70){
+	document.write(`점수가 ${re}이므로 <b stlye='color:blue'>중</b>`)
+}else{
+	document.write(`점수가 ${re}이므로 <i stlye='color:orange'>하</i>`)
+} 
+</script>
+
+<h2>조건 판단문 switch</h2>
+<script type="text/javascript">
+let hak = "B";
+switch(hak.toLowerCase()){	// toLowerCase : 소문자화
+case "a":
+case "b":
+case "c":
+	document.write('잘하고 있어요');
+	break;
+case "d":
+	document.write('분발하세요');
+	break;
+default:
+	document.write('기타');
+}
+</script>
+</body>
+</html>

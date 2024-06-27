@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>post 요청</h2>
+<form action="post.do" method="post">
+이름 : <input type = "text" name="name" value="한국인"><br>
+주소1 : <input type = "text" name="addr" value="서울시"><br>	<!-- 이름이 똑같기 때문에 배열로 받아줘야해 -->
+주소2 : <input type = "text" name="addr" value="서초구"><br>
+<br>
+좋아하는 스포츠는?<br>
+<input type="checkbox" name="sports" value="축구">축구&nbsp;&nbsp;
+<input type="checkbox" name="sports" value="야구">야구&nbsp;&nbsp;
+<input type="checkbox" name="sports" value="농구">농구<br>
+<br>
+자신있는 언어는?<br>
+<input type="radio" name="lang" value="자바" checked="checked">자바&nbsp;&nbsp;
+<input type="radio" name="lang" value="자바스크립트">자바스크립트&nbsp;&nbsp;
+<input type="radio" name="lang" value="파이썬">파이썬<br>
+<br>
+교통수단은?
+<select name="tr">	<!-- multiple="multiple" -->
+<option>전철</option>
+<option>버스</option>
+<option>도보</option>
+</select>
+
+<input type="hidden" name="edu" value="에이콘">
+<br><br><br>
+<input type="submit" value="자료 전송">
+</form>
+</body>
+</html>

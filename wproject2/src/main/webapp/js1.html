@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript</title>
+</head>
+<body>
+<h1>자바스크립트 연습</h1>
+
+<script type="text/javascript">
+<!--
+console.log("보이니");
+document.write("화면으로 보임");
+-->
+</script>
+<br>여기는 html<br>
+<script type="text/javascript">
+"use strict";
+var a = 5;
+let b = 10;
+const c = a + b;
+document.write("c:", c);
+</script>
+<br>여기는 다시 html<hr>
+<script type="text/javascript">
+document.write("이건 자바스크립트");
+document.write("변수 선언 시 let과", "const 강력 추천");
+
+document.write("<br>kbs : ", kbs); // 선언도 안했는데 찍겠대! 실행 시 에러는 안나온다. undefined가 뜬다.  var는 에러가 나도 계속 진행
+var kbs = 9;	// 전역적		global scope
+// 호이스팅이란 변수와 함수 선언이 맨 위로 이동되는 자바스크립트 매커니즘
+document.write("<br>kbs : ", kbs);
+
+{
+	var v1 = 1;
+	{
+		var v2 = 2;
+		{
+			var v3 = 3;
+		}
+	}
+}
+document.write("<br>", v1, v2, v3);	// 에러 없음    var 사용은 자제하자. let을 쓰자!
+
+/*
+{
+	let w1 = 1; // let은 지역이라 정해진 범위가 아닌 다른 범위에서 사용시 에러남
+	{
+		let w2 = 2;
+		{
+			let w3 = 3;
+		}
+	}
+}
+document.write("<br>", w1, w2, w3);	// Uncaught ReferenceError: w1 is not defined
+*/
+
+//document.write("<br>mbc : ", mbc);  // ReferenceError: Cannot access 'mbc' before initialization   초기값을 안줬잖아! 프로그램 진행을 못하고 종료됨  => let
+let mbc = 11; // 지역적 local scope   var를 썼을 때와 let을 썼을 때가 다르다. 
+/* 여러 줄 주석 */
+
+document.write("<br>mbc : ", mbc);
+
+const sbs = 5;	// const는 수정이 불가한 상수
+//sbs = 3;	// TypeError: Assignment to constant variable.
+document.write("<br>sbs : ", sbs);
+
+document.write("<br>원시 타입 : Number, String, Boolean, Undefined, Null, Simbole");
+document.write("<br>참조 타입 : Object, Array, Function");
+document.write("<br>type 확인 : ", typeof(1), ' ', typeof 1, ' ', typeof 1.5, ' ',
+				typeof(-12), ' ', typeof 'kor', ' ',
+				typeof true, ' ', typeof false, ' ',
+				typeof null, ' ', typeof undefined);
+// 타입을 확인할땐 typeof를 쓰면 되는데 이 때 괄호를 둘러줘도 되고 안둘러줘도 된다.
+
+let aa = null;  // 명시적으로 값이 없음을 표현
+let bb = undefined;
+let cc;	// 묵시적으로 값이 없음을 표현 cc는 결국 undefined
+document.write("<br>aa : ", aa, ",bb : ", bb, ', cc : ', cc);
+document.write(`<br>aa : ${aa}, bb : ${bb}, cc : ${cc}`);	// back tic 문자로 감쌈
+document.write(`<br>${1 + 5 * 2}`);
+</script>
+
+<br>연산자<br>
+<script type="text/javascript">
+let x = 5, y = 2;
+document.write('<br>x : ', x,', y: ', y);
+document.write('<br>산술연산');
+document.write('<br>', x + y, ' ', x - y, ' ', x * y);
+document.write('<br>', x / y, ' ', x % y);
+document.write('<br>', x ** y, ' ', 4 ** (1/2), ' ', 8 ** (1/3)); // 거듭제곱, 제곱근, 세제곱근 연산
+
+document.write('<br>관계연산');
+document.write('<br>', x > y, ' ', x <= y, ' ', x == y, ' ', x != y);
+document.write('<br>', 5 == '5', ' ', 5 === '5', ' ', 5 != '5', ' ', 5 !== '5'); 	// =이 하나 있으면 치환, 두개있으면 같냐?! 세개도 같냐고 물어본거 숫자 5와 문자 5가 같니?! ==은 같다함 ===은 다르다함 ===은 타입에 의한 비교 ==은 형변환을 함
+// == : 타입에 의한 비교(자동형변환을 해버린다.), === : 값에 의한 비교
+// 자바스크립트에서 같냐고 물어볼땐 ===을 쓴다. ==을 쓰는 경우는 잘 없다.
+// 자바스크립트에서의 값 비교는 ===, !==을 쓴다ㅏ
+
+document.write('<br>논리연산');
+document.write('<br>', x > y && 7 > x);	// and 연산
+document.write('<br>', x > y || 7 > x);	// or 연산
+
+document.write('<br>삼항연산');
+document.write('<br>', (x > y)?100:200);
+
+let kor = null;
+//let kor = 100;
+let eng = 90;
+let result1 = (kor !== null && a !== undefined)?kor:eng;
+document.write(`<br>result1의 결과는 ${result1}입니다`);
+let result2 = kor??eng; // result1을 이처럼 짧게 쓸 수 있다.
+document.write(`<br>result2의 결과는 ${result2}입니다`);
+
+document.write('<br>연산자 우선 순위 ', 10 + 20 * 2, ' ', (10 + 20) * 2);
+// ( ) > 산술(*, / > + -) > 관계 > 논리 > 치환
+
+document.write('<br>문자열 더하기 연산');
+document.write('<br>', '대한' + '민국', ' ', '5' + '6'); 
+document.write('<br>', '5' + 6, ' ', Number('5') + Number('6'), ' ', +'5' + 6); // // 숫자5가 문자열과 더하기 하면 문자열로 자동 형변환이 된다.    Number 함수를 이용해서 강제형변환
+// +'숫자 모양의 문자열' : 단항 덧셈 연산자. 숫자로 강제 형변환(Number 역할)
+document.write('<br>', '1' + 2, ' ', 1 + +'2');
+document.write('<br>', 6 - '2', ' ', 6 * '2', ' ', 6 / '2');
+document.write('<br>', 'c' + 'a' + 't' === 'cat');	// true
+document.write('<br>', Boolean(true), ' ', Boolean(false));
+document.write('<br>', Boolean('true'), ' ', Boolean('false'));
+document.write('<br>', Boolean(123), ' ', Boolean(-123.4), ' ', Boolean('0')); // 모두 true   여기서 사용한 0은 문자열 0이라 true
+document.write('<br>', Boolean('kor'), ' ', Boolean('홍길동'), ' ', Boolean('5')); // 모두 true
+
+// javascript에선 얘네만 false다. 
+// 값이 있으면 true, 값이 없으면 false 나오는데 0도 값이 없는걸로 보고 false 출력
+document.write('<br>', Boolean(0), ' ', Boolean(false), ' ', Boolean(''));
+document.write('<br>', Boolean(null), ' ', Boolean(undefined), ' ', Boolean(NaN));
+
+document.write('<br>', '국어' / 2); // 이때 NaN이 나온다. Not a Number
+
+document.write('<br>기타 연산');
+let s1, s2, s3;
+s1 = s2 = s3 = 3 + 4;	// 할당(치환) 연산자 체이닝   연산하고 왼쪽으로 연속적으로 치환
+document.write(`<br>s1 = ${s1} s2 = ${s2} s3 = ${s3}`);
+
+document.write('<br>');
+let my = 1;
+document.write(my);
+my = my + 1;
+document.write(my);
+my += 1;
+document.write(my);
+my++;
+document.write(my);
+++my;
+document.write(my);
+
+let f1 = 1, f2 = 2;
+document.write('<br>', 5 - (f1 = f2 + 1), ' ', '2' > 1); // f2 + 1 값을 f1에게 치환 후 5에서 뺌
+</script>
+</body>
+</html>

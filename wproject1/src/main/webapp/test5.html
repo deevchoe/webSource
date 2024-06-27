@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>* 게시판 글쓰기 *</h2>
+<form action="border.jsp" name="frm" method="post">
+<table border="1">
+	<tr>
+		<td>이름</td>
+		<td><input type="text" name="writer"></td>
+	</tr>
+	<tr>
+		<td>제목</td>
+		<td><input type="text" name="subject" placeholder="제목을 주세요"></td>	<!-- placeholder는 그냥 팁! value 아니다ㅏ -->
+	</tr>
+	<tr>
+		<td>나이</td>
+		<td><input type="number" name="age" value="20"></td>	<!-- 모바일에서는 number 전용 자판으로 바뀜 -->
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td><input type="email" name="email"></td>	<!-- 모바일에서는 email 전용 자판으로 바뀜 -->
+	</tr>
+	<tr>
+		<td>글내용</td>
+		<td><textarea rows="10" cols="50" name="content"></textarea></td> <!-- textarea는 분리하지 않는다. -->
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="  전 송  ">
+			<input type="reset" value="  취 소  ">
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

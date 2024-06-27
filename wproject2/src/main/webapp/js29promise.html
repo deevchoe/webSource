@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>비동기 처리용 Promise 객체</h2>
+주로 웹서버에서 받아온 자료를 클라이언트에서 비동기적으로 처리하고자 할 때 사용
+<script type="text/javascript">
+/*
+콜백 지옥은 JavaScript를 이용한 비동기 프로그래밍시 발생하는 문제로서, 
+함수의 매개 변수로 넘겨지는 콜백 함수가 반복되어 코드의 들여쓰기 수준이 감당하기 힘들 정도로 깊어지는 현상을 말한다.
+ */
+
+/*
+function myProcess(){
+	// 비동기 처리를 하는데, 비동기 안에 여러 개의 비동기 처리를 하면 아래와 같은 코드가 된다. 콜백 지옥
+	setTimeout(() => {	// 코드를 읽기 어렵다. 가독성이 떨어진다.
+		console.log('콜백1 완료');
+		
+		setTimeout(() => {
+			console.log('콜백2 완료');
+			
+			setTimeout(() => {
+				console.log('콜백3 완료');
+			}, 2000)
+		}, 2000)
+	}, 2000);	
+}
+
+myProcess();
+console.log('끝');
+*/
+
+// Promise 객체 등장
+// Promise 객체가 만들어지면 내부적으로 executor가 자동 실행 됨
+// 이 함수를 executor(실행자, 실행함수)라 한다.
+// resolve(value) — 일이 성공적으로 끝난 경우 그 결과를 나타내는 value와 함께 호출
+// reject(error) — 에러 발생 시 에러 객체를 나타내는 error와 함께 호출
+// 처음엔 pending(대기)이었다 resolve가 호출되면 fulfilled, reject가 호출되면 rejected로 변한다.
+// pending(대기): 이행하지도, 거부하지도 않은 초기 상태
+// fulfilled(이행): 연산이 성공적으로 완료됨
+// rejected(거부): 연산이 실패함
+// new Promise(executor)일 때 state는 "pending", result는 undefined가 된다.
+// 비동기 처리가 되면 매개변수 resole("메세지")는 then 메소드로 전달되며
+// 이 때 state는 "fulfilled", result는 "메세지"가 된다.
+
+/* 
+// 실습1
+const myPromise = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('이 값이 then 메소드의 매개변수로 전달됨');
+	}, 2000);
+})
+
+myPromise.then((res) => {
+	console.log('then 메소드 처리 ---------------------');
+	console.log(res);
+});
+*/
+
+// 실습2
+const myPromise = (seconds) => new Promise((resolve, reject) => {
+	setTimeout(() => {
+		let a = 2;
+		if(a % 2 === 0){
+			resolve('이 값이 then 메소드의 매개변수로 전달됨')
+		}else{
+			reject('에러 처리 : reject가 실행되면 catch로 받을 수 있다.');
+		}
+		resolve('이 값이 then 메소드의 매개변수로 전달됨');
+	}, seconds);
+});
+
+myPromise(2000)
+	.then((res) => {
+		console.log('then 메소드 처리 1 ---------------------');
+		console.log(res);
+		
+		return myPromise(2000);		// 다음 번 then 메소드가 호출 됨
+	}).then((res) => {
+		console.log('then 메소드 처리 2 ---------------------');
+		console.log(res);	// 계속 chaining 할 수 있다.
+		
+		return myPromise(2000);		// 다음 번 then 메소드가 호출 됨
+	}).then((res) => {
+		console.log('then 메소드 처리 3 ---------------------');
+		console.log(res);
+		
+		return myPromise(2000);		// 다음 번 then 메소드가 호출 됨
+	}).catch((res) => {
+		console.log(res);
+	}); // finally를 적을 수도 있다.
+
+// promise로 사용자 로그인, 보안설정, 출력 등 다양한 응용이 가능
+
+</script>
+</body>
+</html>
