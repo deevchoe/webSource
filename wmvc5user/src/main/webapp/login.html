@@ -13,10 +13,25 @@ window.onload = function(){
 }
 
 function loginFunc(){
-	alert("a");
+	//alert("a");
+	if(frm.userid.value === ""){
+		alert("아이디 입력!");
+		frm.userid.focus();
+		return false;
+	}
+	if(frm.password.value === ""){
+		alert("비밀번호 입력!");
+		frm.password.focus();
+		return false;
+	}
+	
+	frm.action="login.m2";
+	frm.submit();
 }
 function insertFunc(){
-	alert("b");
+	//alert("b");
+	frm.action="insert.jsp";
+	frm.submit();
 }
 </script>
 </head>
