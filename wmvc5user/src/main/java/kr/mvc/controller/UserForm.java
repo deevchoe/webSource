@@ -35,5 +35,4 @@ public class UserForm {
 		this.email = email;
 	}
 	
-	
 }

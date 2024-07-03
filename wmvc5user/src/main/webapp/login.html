@@ -8,39 +8,36 @@ window.onload = function(){
 	let btnLogin = document.querySelector("#btnLogin");
 	btnLogin.addEventListener("click", loginFunc, false);
 	
-	document.querySelector("#btnInsert").
-		addEventListener("click", insertFunc, false);
+	document.querySelector("#btnInsert").addEventListener("click", insertFunc, false);
 }
 
 function loginFunc(){
-	//alert("a");
 	if(frm.userid.value === ""){
 		alert("아이디 입력!");
 		frm.userid.focus();
 		return false;
-	}
-	if(frm.password.value === ""){
+	} else if(frm.password.value === ""){
 		alert("비밀번호 입력!");
 		frm.password.focus();
 		return false;
 	}
-	
-	frm.action="login.m2";
+	frm.action = "login.m2";
 	frm.submit();
 }
+
 function insertFunc(){
-	//alert("b");
-	frm.action="insert.jsp";
+	frm.action = "insert.html";
 	frm.submit();
 }
+
 </script>
 </head>
 <body>
-<h3>* 사용자 관리 로그인(MVC) *</h3>
+<h3>🌟 사용자 관리 로그인 (MVC) 🌟</h3>
 <form name="frm" method="post">
-아 이 디 : <input type="text" name="userid"><br>
-비밀번호 : <input type="text" name="password"><br>
-<input type="button" value="로 그 인" id="btnLogin">
+ID: <input type="text" name="userid"><br>
+PW: <input type="text" name="password"><br>
+<input type="button" value="로그인" id="btnLogin">
 <input type="button" value="회원가입" id="btnInsert">
 </form>
 </body>
